@@ -1,15 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "1.9.25"
-	kotlin("plugin.spring") version "1.9.25" apply false
+	val kotlinVersion = "1.9.25"
+	kotlin("jvm") version kotlinVersion
+	kotlin("plugin.spring") version kotlinVersion apply false
 	id("org.springframework.boot") version "3.3.7" apply false
 	id("io.spring.dependency-management") version "1.1.7" apply false
 }
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
 
@@ -23,14 +24,14 @@ allprojects {
 	}
 
 	tasks.withType<JavaCompile> {
-		sourceCompatibility = "21"
-		targetCompatibility = "21"
+		sourceCompatibility = "17"
+		targetCompatibility = "17"
 	}
 
 	tasks.withType<KotlinCompile> {
 		kotlinOptions {
-			freeCompilerArgs = listOf("-Xjsr305-strict")
-			jvmTarget = "21"
+			freeCompilerArgs = listOf("-Xjsr305=strict")
+			jvmTarget = "17"
 		}
 	}
 
@@ -43,9 +44,7 @@ allprojects {
 subprojects {
 	apply {
 		plugin("kotlin")
-		plugin("kotlin-kapt")
 		plugin("org.jetbrains.kotlin.plugin.spring")
-
 		plugin("org.springframework.boot")
 		plugin("io.spring.dependency-management")
 	}
