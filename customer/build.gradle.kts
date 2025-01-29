@@ -13,9 +13,16 @@ tasks.named<Jar>("jar") {
 }
 
 dependencies {
+
     // dependency module
     implementation(project(":common"))
+    implementation(project(":common:exception"))
+    implementation(project(":common:logging"))
+    implementation(project(":common:monitoring"))
+//    implementation(project(":common:security"))
+    implementation(project(":storage:document"))
 
+    // spring web
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
@@ -31,17 +38,12 @@ dependencies {
     kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 
     // security
-    implementation("org.springframework.boot:spring-boot-starter-security")
-
-    // jwt
-    implementation("io.jsonwebtoken:jjwt-api:0.12.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")
-    implementation("io.jsonwebtoken:jjwt-jackson:0.12.5")
+//    implementation("org.springframework.boot:spring-boot-starter-security")
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.springframework.security:spring-security-test")
+//    testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.test {

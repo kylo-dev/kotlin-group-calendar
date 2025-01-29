@@ -51,6 +51,7 @@ subprojects {
 
 	dependencies {
 		implementation("org.springframework.boot:spring-boot-starter-web")
+		implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
 
 		// kotlin common set
 		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

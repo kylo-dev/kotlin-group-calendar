@@ -1,0 +1,16 @@
+#spring:
+#  data:
+#    mongodb:
+#      username: kylo
+#      password: kylo3677
+#      host: localhost
+#      port: 27017
+#      database: calendar_db
+#      authentication-database: admin
+
+mongodb:
+  uri: mongodb://kylo:kylo3677@localhost:27017/calendar_db
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG

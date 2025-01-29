@@ -4,9 +4,9 @@ tasks.named<BootJar>("bootJar") {
     enabled = false
 }
 tasks.named<Jar>("jar") {
-    enabled = false
+    enabled = true
 }
 
 dependencies {
-    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+//    implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
 }
