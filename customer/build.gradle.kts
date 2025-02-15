@@ -4,12 +4,18 @@ plugins {
     val kotlinVersion = "1.9.25"
     kotlin("kapt")
 }
+val springCloudVersion by extra("2023.0.5")
 
 tasks.named<BootJar>("bootJar") {
     enabled = true
 }
 tasks.named<Jar>("jar") {
     enabled = false
+}
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+    }
 }
 
 dependencies {
@@ -35,6 +41,7 @@ dependencies {
         exclude(group = "org.mongodb", module = "mongo-java-driver")
     }
     implementation("com.querydsl:querydsl-apt:5.0.0:jakarta")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 
     // security

@@ -1,4 +1,4 @@
-package com.gc.api.customer.application.port.out
+package com.gc.api.customer.application.port.out.persistence
 
 interface GetMemberPort {
 

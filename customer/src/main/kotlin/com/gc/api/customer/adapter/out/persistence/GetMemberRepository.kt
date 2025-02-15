@@ -1,4 +1,4 @@
-package com.gc.api.customer.adapter.out.repository
+package com.gc.api.customer.adapter.out.persistence
 
 import com.gc.adapter.out.infra.persistence.member.MemberDocument
 import com.gc.adapter.out.infra.persistence.member.QMemberDocument
