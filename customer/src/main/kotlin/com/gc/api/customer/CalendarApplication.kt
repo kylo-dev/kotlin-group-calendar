@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
   ],
   exclude = [DataSourceAutoConfiguration::class]
 )
-@EnableMongoRepositories(basePackages = ["com.gc.adapter.out.infra.persistence"])
+@EnableMongoRepositories(basePackages = ["com.gc.storage.document"])
 @EnableMongoAuditing(dateTimeProviderRef = "mongoAuditingDateTimeProvider")
 @EnableFeignClients
 class CalendarApplication

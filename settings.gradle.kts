@@ -9,8 +9,6 @@ include("customer")
 //include("client")
 include("common:logging")
 findProject(":common:logging")?.name = "logging"
-include("common:monitoring")
-findProject(":common:monitoring")?.name = "monitoring"
 include("common:exception")
 findProject(":common:exception")?.name = "exception"
 include("common:security")

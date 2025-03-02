@@ -1,13 +1,15 @@
 package com.gc.api.customer.adapter.out.external.social_login.naver
 
 import com.gc.api.customer.adapter.out.external.dto.response.social_login.naver.NaverOAuthToken
+import com.gc.api.customer.framework.config.feign.FeignRequestInterceptor
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 
 @FeignClient(
   name = "naverOAuthClient",
-  url = "https://nid.naver.com"
+  url = "https://nid.naver.com",
+  configuration = [FeignRequestInterceptor::class]
 )
 interface NaverOAuthClient {
 

@@ -8,5 +8,5 @@ tasks.named<Jar>("jar") {
 }
 
 dependencies {
-//    implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
+    implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
 }

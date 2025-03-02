@@ -24,7 +24,6 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":common:exception"))
     implementation(project(":common:logging"))
-    implementation(project(":common:monitoring"))
 //    implementation(project(":common:security"))
     implementation(project(":storage:document"))
 
@@ -46,6 +45,9 @@ dependencies {
 
     // security
 //    implementation("org.springframework.boot:spring-boot-starter-security")
+
+    // logging
+    implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
