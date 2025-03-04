@@ -1,7 +1,7 @@
 package com.gc.common.framework.logging
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.gc.utils.logger
+import com.gc.common.utils.logger
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.stereotype.Component

@@ -1,19 +1,19 @@
-package com.gc.common.framework.security
+package com.gc.api.customer.framework.security
 
-import com.gc.storage.document.member.MemberDocument
+import com.gc.api.customer.domain.model.member.Member
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 
 class CustomAuthentication(
-  val memberDocument: MemberDocument
+  val member: Member
 ) :Authentication{
   override fun getName(): String {
-    return memberDocument.nickname
+    return member.nickname
   }
 
   override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
     val authorities = ArrayList<CustomAuthority>()
-    if (memberDocument == null) {
+    if (member == null) {
       return authorities
     }
     authorities.add(CustomAuthority.MEMBER)
@@ -28,8 +28,8 @@ class CustomAuthentication(
     throw UnsupportedOperationException()
   }
 
-  override fun getPrincipal(): MemberDocument {
-    return memberDocument
+  override fun getPrincipal(): Member {
+    return member
   }
 
   override fun isAuthenticated(): Boolean {

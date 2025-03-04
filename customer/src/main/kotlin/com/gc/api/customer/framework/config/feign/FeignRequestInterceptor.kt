@@ -1,6 +1,6 @@
 package com.gc.api.customer.framework.config.feign
 
-import com.gc.utils.logger
+import com.gc.common.utils.logger
 import feign.RequestInterceptor
 import feign.RequestTemplate
 import org.springframework.stereotype.Component

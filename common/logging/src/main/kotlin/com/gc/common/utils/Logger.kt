@@ -1,4 +1,4 @@
-package com.gc.utils
+package com.gc.common.utils
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 

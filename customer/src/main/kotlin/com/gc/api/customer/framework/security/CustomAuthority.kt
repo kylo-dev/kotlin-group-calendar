@@ -1,4 +1,4 @@
-package com.gc.common.framework.security
+package com.gc.api.customer.framework.security
 
 import org.springframework.security.core.GrantedAuthority
 
@@ -9,5 +9,11 @@ enum class CustomAuthority: GrantedAuthority {
 
   override fun getAuthority(): String {
     return name
+  }
+
+  companion object {
+    fun getAuthority(isAdmin: Boolean): String {
+      return if (isAdmin) ADMIN.name else MEMBER.name
+    }
   }
 }

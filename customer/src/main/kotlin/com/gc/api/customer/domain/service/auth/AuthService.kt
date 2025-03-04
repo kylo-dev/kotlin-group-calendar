@@ -12,16 +12,13 @@ class AuthService(
 ) {
 
   fun kakaoLogin(accessCode: String): KakaoProfile {
-
-    val kakaoOAuthToken = kakaoClient.getAccessToken(accessCode)
-    val requestProfile = kakaoClient.getProfile(kakaoOAuthToken)
+    val requestProfile = kakaoClient.getProfile(accessCode)
 
     return requestProfile as KakaoProfile
   }
 
   fun naverLogin(accessCode: String): NaverProfile {
-    val naverOAuthToken = naverClient.getAccessToken(accessCode)
-    val naverProfile = naverClient.getProfile(naverOAuthToken)
+    val naverProfile = naverClient.getProfile(accessCode)
 
     return naverProfile as NaverProfile
   }

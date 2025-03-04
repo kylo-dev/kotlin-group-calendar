@@ -1,8 +1,7 @@
 package com.gc.api.customer.adapter.out.external.social_login.naver
 
-import com.gc.api.customer.adapter.out.external.dto.response.social_login.OAuthToken
+import com.gc.api.customer.adapter.out.external.dto.response.social_login.OAuthProfile
 import com.gc.api.customer.adapter.out.external.dto.response.social_login.naver.NaverOAuthToken
-import com.gc.api.customer.adapter.out.external.dto.response.social_login.naver.NaverProfile
 import com.gc.api.customer.application.port.out.external.social_login.SocialLoginPort
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -15,11 +14,8 @@ class NaverClient(
   private val naverProfileClient: NaverProfileClient,
 ): SocialLoginPort {
 
-  override fun getAccessToken(accessCode: String): NaverOAuthToken {
-    return naverOAuthClient.getAccessToken(clientId, clientSecret, accessCode)
-  }
-
-  override fun getProfile(oAuthToken: OAuthToken): NaverProfile {
-    return naverProfileClient.getProfile("Bearer ${oAuthToken.accessToken}")
+  override fun getProfile(accessCode: String): OAuthProfile {
+    val accessToken: NaverOAuthToken = naverOAuthClient.getAccessToken(clientId, clientSecret, accessCode)
+    return naverProfileClient.getProfile("Bearer ${accessToken.accessToken}")
   }
 }

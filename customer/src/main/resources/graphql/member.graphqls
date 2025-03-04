@@ -1,0 +1,10 @@
+type Member {
+    id: ID
+    nickname: String
+    email: String
+    isNotificationEnabled: Boolean
+    profile: String
+    oauthProvider: String
+    isAdmin: Boolean
+    isMondayStart: Boolean
+}
