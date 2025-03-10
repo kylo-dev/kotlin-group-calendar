@@ -1,3 +1,7 @@
+extend type Query {
+    members: [Member]
+}
+
 type Member {
     id: ID
     nickname: String

@@ -24,5 +24,7 @@ class CustomerMvcConfig(
   override fun addInterceptors(registry: InterceptorRegistry) {
     registry.addInterceptor(serverLoggingInterceptor)
     registry.addInterceptor(requestInterceptor)
+      .addPathPatterns("/**")
+      .excludePathPatterns("/api/login/**")
   }
 }

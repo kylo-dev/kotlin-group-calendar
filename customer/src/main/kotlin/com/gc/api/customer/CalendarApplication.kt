@@ -4,7 +4,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 import org.springframework.boot.runApplication
 import org.springframework.cloud.openfeign.EnableFeignClients
-import org.springframework.data.mongodb.config.EnableMongoAuditing
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 
 @SpringBootApplication(
@@ -14,7 +13,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
   exclude = [DataSourceAutoConfiguration::class]
 )
 @EnableMongoRepositories(basePackages = ["com.gc.storage.document"])
-@EnableMongoAuditing(dateTimeProviderRef = "mongoAuditingDateTimeProvider")
 @EnableFeignClients
 class CalendarApplication
 

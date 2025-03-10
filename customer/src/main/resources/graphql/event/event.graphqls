@@ -1,6 +1,11 @@
 scalar Date
 scalar Time
 
+extend type Mutation {
+    saveEvent(postEventRequest: PostEventRequest): ID
+    updateEvent(eventId: ID!, updateEventRequest: UpdateEventRequest!): ID
+    deleteEvent(eventId: ID!): ID
+}
 
 ### EVENT
 type Event {
@@ -31,17 +36,22 @@ input PostEventRequest {
     isAllDay: Boolean
     alarm: Alarm
     labelId: String
+    frequency: Frequency
 }
 
-
-### Recurrence_Event
-type RecurrenceEvent {
-    id: ID
-    event: Event
+input UpdateEventRequest {
+    title: String
+    date: Date
+    startTime: Time
+    endTime: Time
+    isAllDay: Boolean
+    alarm: Alarm
+    labelId: String
     frequency: Frequency
 }
 
 enum Frequency {
+    NONE
     DAILY
     WEEKLY
     MONTHLY

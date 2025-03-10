@@ -1,7 +1,7 @@
 package com.gc.api.customer.adapter.out.persistence.event
 
 import com.gc.api.customer.application.port.out.persistence.event.PostEventPort
-import com.gc.api.customer.application.service.dto.event.EventServiceRequest
+import com.gc.api.customer.application.service.dto.event.PostEventDto
 import com.gc.storage.document.event.EventDocument
 import com.gc.storage.document.event.EventMongoRepository
 import org.springframework.stereotype.Repository
@@ -11,20 +11,20 @@ class PostEventRepository(
   val eventMongoRepository: EventMongoRepository,
 ): PostEventPort {
 
-  override fun saveEvent(eventServiceRequest: EventServiceRequest): String {
-    val newEvent = eventMongoRepository.save(createEvent(eventServiceRequest))
+  override fun saveEvent(postEventDto: PostEventDto): String {
+    val newEvent = eventMongoRepository.save(createEvent(postEventDto))
     return newEvent.id!!
   }
 
-  private fun createEvent(request: EventServiceRequest): EventDocument {
+  private fun createEvent(request: PostEventDto): EventDocument {
     return EventDocument(
       title = request.title,
-      date = request.date,
-      startTime = request.startTime,
-      endTime = request.endTime,
+      startDateTime = request.startDateTime,
+      endDateTime = request.endDateTime,
       isAllDay = request.isAllDay,
       labelId = request.labelId,
       alarm = request.alarm.name,
+      frequency = request.frequency.name,
       memberId = request.memberId
     )
   }
