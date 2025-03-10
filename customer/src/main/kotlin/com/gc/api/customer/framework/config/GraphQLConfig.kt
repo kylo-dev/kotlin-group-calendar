@@ -10,14 +10,14 @@ import org.springframework.graphql.execution.RuntimeWiringConfigurer
 @Configuration
 class GraphQLConfig {
 
-  @Bean
-  fun dateScalar(): RuntimeWiringConfigurer {
-    return RuntimeWiringConfigurer { wiringBuilder: RuntimeWiring.Builder ->
-      wiringBuilder.scalar(
-        ExtendedScalars.Date
-      )
-    }
-  }
+//  @Bean
+//  fun dateScalar(): RuntimeWiringConfigurer {
+//    return RuntimeWiringConfigurer { wiringBuilder: RuntimeWiring.Builder ->
+//      wiringBuilder.scalar(
+//        ExtendedScalars.Date
+//      )
+//    }
+//  }
 
   @Bean
   fun dateTimeScalar(): RuntimeWiringConfigurer {
@@ -28,13 +28,13 @@ class GraphQLConfig {
     }
   }
 
-  @Bean
-  fun timeScalar(): RuntimeWiringConfigurer {
-    return RuntimeWiringConfigurer { wiringBuilder: RuntimeWiring.Builder ->
-      wiringBuilder.scalar(
-        ExtendedScalars.Time
-      )
-    }
-  }
+//  @Bean
+//  fun timeScalar(): RuntimeWiringConfigurer {
+//    return RuntimeWiringConfigurer { wiringBuilder: RuntimeWiring.Builder ->
+//      wiringBuilder.scalar(
+//        ExtendedScalars.Time
+//      )
+//    }
+//  }
 
 }

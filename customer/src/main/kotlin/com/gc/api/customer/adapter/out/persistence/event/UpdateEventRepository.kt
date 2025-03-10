@@ -22,9 +22,8 @@ class UpdateEventRepository(
 
     val update = Update()
     request.title?.let { update.set("title", it) }
-    request.date?.let { update.set("date", it) }
-    request.startTime?.let { update.set("startTime", it) }
-    request.endTime?.let { update.set("endTime", it) }
+    request.startDateTime?.let { update.set("startDateTime", it) }
+    request.endDateTime?.let { update.set("endDateTime", it) }
     request.isAllDay?.let { update.set("isAllDay", it) }
     request.alarm?.let { update.set("alarm", it) }
     request.labelId?.let { update.set("labelId", it) }
