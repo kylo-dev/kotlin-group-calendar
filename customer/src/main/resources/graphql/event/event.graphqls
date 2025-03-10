@@ -1,0 +1,49 @@
+scalar Date
+scalar Time
+
+
+### EVENT
+type Event {
+    id: ID!
+    title: String!
+    date: Date!
+    startTime: Time
+    endTIme: Time
+    isAllDay: Boolean
+    alarm: Alarm
+    member: Member
+}
+
+enum Alarm {
+    NONE
+    D_DAY
+    D_7DAY
+    BEFORE_10
+    BEFORE_30
+    BEFORE_60
+}
+
+input PostEventRequest {
+    title: String!
+    date: Date!
+    startTime: Time
+    endTime: Time
+    isAllDay: Boolean
+    alarm: Alarm
+    labelId: String
+}
+
+
+### Recurrence_Event
+type RecurrenceEvent {
+    id: ID
+    event: Event
+    frequency: Frequency
+}
+
+enum Frequency {
+    DAILY
+    WEEKLY
+    MONTHLY
+    YEARLY
+}
