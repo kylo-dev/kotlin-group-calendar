@@ -6,4 +6,5 @@ interface GetMemberLabelPort {
 
   fun getDefaultLabels(): List<EventLabel>
   fun getCustomLabels(memberId: String): List<EventLabel>
+  fun getLabel(memberId: String, labelId: String): EventLabel
 }

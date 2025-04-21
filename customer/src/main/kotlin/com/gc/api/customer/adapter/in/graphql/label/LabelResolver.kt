@@ -8,7 +8,7 @@ import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
 
 @Controller
-class LabelGraphController(
+class LabelResolver(
   private val labelQueryService: LabelQueryService,
   private val requestInfo: RequestInfo,
 ) {

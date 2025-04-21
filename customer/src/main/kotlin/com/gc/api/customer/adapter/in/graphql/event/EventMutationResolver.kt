@@ -10,7 +10,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping
 import org.springframework.stereotype.Controller
 
 @Controller
-class EventGraphQLController(
+class EventMutationResolver(
   private val eventCommandService: EventCommandService,
   private val requestInfo: RequestInfo,
 ) {

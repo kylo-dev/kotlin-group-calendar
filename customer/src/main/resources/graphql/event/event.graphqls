@@ -1,4 +1,4 @@
-scalar DateTime
+scalar LocalDateTime
 
 extend type Mutation {
     saveEvent(postEventRequest: PostEventRequest): ID
@@ -14,11 +14,13 @@ extend type Query {
 type Event {
     id: ID!
     title: String!
-    startDateTime: DateTime!
-    endDateTime: DateTime!
+    startDateTime: LocalDateTime!
+    endDateTime: LocalDateTime!
     isAllDay: Boolean!
+    label: Label!
     alarm: Alarm
-    member: Member
+    frequency: Frequency
+    memberId: String!
 }
 
 enum Alarm {
@@ -32,8 +34,8 @@ enum Alarm {
 
 input PostEventRequest {
     title: String!
-    startDateTime: DateTime!
-    endDateTime: DateTime
+    startDateTime: LocalDateTime!
+    endDateTime: LocalDateTime
     isAllDay: Boolean!
     alarm: Alarm
     labelId: String!
@@ -42,8 +44,8 @@ input PostEventRequest {
 
 input UpdateEventRequest {
     title: String
-    startDateTime: DateTime
-    endDateTime: DateTime
+    startDateTime: LocalDateTime
+    endDateTime: LocalDateTime
     isAllDay: Boolean
     alarm: Alarm
     labelId: String

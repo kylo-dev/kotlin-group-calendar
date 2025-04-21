@@ -1,17 +1,16 @@
 package com.gc.api.customer.domain.model.event
 
 import com.gc.api.customer.domain.model.EventAlarm
-import java.awt.Label
-import java.time.LocalDate
-import java.time.LocalTime
+import java.time.LocalDateTime
 
 data class Event(
   val id: String,
-  val date: LocalDate,
-  val startTime: LocalTime?,
-  val endTime: LocalTime?,
+  val title: String,
+  val startDateTime: LocalDateTime,
+  val endDateTime: LocalDateTime,
   val isAllDay: Boolean,
-  val label: Label,
   val alarm: EventAlarm,
+  val frequency: EventFrequency,
+  val labelId: String,
   val memberId: String,
 )

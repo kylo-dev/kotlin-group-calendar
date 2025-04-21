@@ -25,4 +25,8 @@ class LabelQueryService(
     return labelMap.values.toList()
 
   }
+
+  fun getLabel(memberId: String, labelId: String): EventLabel {
+    return getMemberLabelPort.getLabel(memberId, labelId)
+  }
 }

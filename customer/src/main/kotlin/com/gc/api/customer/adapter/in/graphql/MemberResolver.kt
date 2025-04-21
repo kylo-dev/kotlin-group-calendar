@@ -6,7 +6,7 @@ import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
 
 @Controller
-class MemberGraphController(
+class MemberResolver(
   val memberMongoRepository: MemberMongoRepository,
 ) {
 
