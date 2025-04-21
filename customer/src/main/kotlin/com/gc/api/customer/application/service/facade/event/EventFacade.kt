@@ -1,6 +1,6 @@
 package com.gc.api.customer.application.service.facade.event
 
-import com.gc.api.customer.adapter.`in`.dto.event.request.response.EventResponse
+import com.gc.api.customer.adapter.`in`.dto.event.response.EventResponse
 import com.gc.api.customer.domain.service.event.EventQueryService
 import com.gc.api.customer.domain.service.label.LabelQueryService
 import org.springframework.stereotype.Service

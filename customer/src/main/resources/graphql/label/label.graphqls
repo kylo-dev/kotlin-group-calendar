@@ -2,8 +2,18 @@ extend type Query {
     labels: [Label]
 }
 
+extend type Mutation {
+    changeLabel(changeLabelRequest: ChangeLabelRequest): String
+}
+
 type Label {
     id: ID!
     label: String!
     color: String!
+}
+
+input ChangeLabelRequest {
+    labelId: ID!,
+    labelName: String,
+    labelColor: String
 }
