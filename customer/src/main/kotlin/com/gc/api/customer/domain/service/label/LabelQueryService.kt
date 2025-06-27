@@ -29,4 +29,12 @@ class LabelQueryService(
   fun getLabel(memberId: String, labelId: String): EventLabel {
     return getMemberLabelPort.getLabel(memberId, labelId)
   }
+
+  // Calendar 표시할 라벨 조회
+  fun getAllEventLabel(memberId: String, labelIds: Set<String>): List<EventLabel> {
+
+    return labelIds
+      .map { getMemberLabelPort.getLabel(memberId, it) }
+      .toList()
+  }
 }

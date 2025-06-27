@@ -1,4 +1,4 @@
-package com.gc.api.customer.framework.config
+package com.gc.api.customer.framework.config.graphql
 
 import graphql.language.StringValue
 import graphql.schema.Coercing
@@ -17,7 +17,6 @@ object LocalDateTimeScalar : Coercing<LocalDateTime, String> {
 
   override fun parseValue(input: Any): LocalDateTime {
     return try {
-      println(input)
       LocalDateTime.parse(input.toString(), formatter)
     } catch (e: Exception) {
       throw CoercingParseValueException("Invalid LocalDateTime format: $input")

@@ -1,4 +1,5 @@
 scalar LocalDateTime
+scalar LocalDate
 
 extend type Mutation {
     saveEvent(postEventRequest: PostEventRequest): ID
@@ -8,6 +9,7 @@ extend type Mutation {
 
 extend type Query {
     event(eventId: ID!): Event
+    events(startDate: LocalDate!, endDate: LocalDate): [CalendarEvent]
 }
 
 ### EVENT
@@ -21,6 +23,15 @@ type Event {
     alarm: Alarm
     frequency: Frequency
     memberId: String!
+}
+
+### Calendar Event
+type CalendarEvent {
+    id: ID!
+    title: String!
+    startDate: LocalDate!
+    endDate: LocalDate!
+    labelColor: String!
 }
 
 enum Alarm {

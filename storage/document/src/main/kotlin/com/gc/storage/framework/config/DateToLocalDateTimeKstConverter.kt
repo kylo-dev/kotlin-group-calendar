@@ -10,5 +10,9 @@ import java.util.*
 @Component
 @ReadingConverter
 class DateToLocalDateTimeKstConverter : Converter<Date, LocalDateTime> {
-  override fun convert(source: Date): LocalDateTime = source.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().minusHours(9)
+  override fun convert(source: Date): LocalDateTime =
+    source.toInstant()
+      .atZone(ZoneId.of("Asia/Seoul"))
+      .toLocalDateTime()
+      .minusHours(9)
 }
