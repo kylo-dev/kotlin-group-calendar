@@ -6,10 +6,10 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class DeleteEventRepository(
-  private val eventMongoRepository: EventMongoRepository,
-): DeleteEventPort {
+    private val eventMongoRepository: EventMongoRepository,
+) : DeleteEventPort {
 
-  override fun deleteEvent(eventId: String) {
-    eventMongoRepository.deleteById(eventId)
-  }
+    override fun deleteEvent(eventId: String) {
+        eventMongoRepository.deleteById(eventId)
+    }
 }

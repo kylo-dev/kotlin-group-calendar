@@ -5,6 +5,6 @@ import com.gc.api.customer.domain.model.event.Event
 
 interface GetEventPort {
 
-  fun getEvent(eventId: String): Event
+  fun getEvent(eventId: String): Event?
   fun getCalendar(getCalendarDto: GetCalendarDto): List<Event>
 }

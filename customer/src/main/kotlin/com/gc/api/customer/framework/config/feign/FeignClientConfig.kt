@@ -1,6 +1,6 @@
 package com.gc.api.customer.framework.config.feign
 
-import com.gc.common.framework.exception.CustomAuthenticationException
+import com.gc.common.exception.CustomAuthenticationException
 import common.exception.CustomNotFoundException
 import feign.FeignException
 import feign.Response
@@ -10,11 +10,6 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class FeignClientConfig {
-
-//  @Bean
-//  fun feignLoggerLevel(): Logger.Level {
-//    return Logger.Level.FULL
-//  }
 
   @Bean
   fun errorDecoder(): ErrorDecoder {

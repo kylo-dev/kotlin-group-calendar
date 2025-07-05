@@ -1,7 +1,7 @@
 package com.gc.api.customer.adapter.out.external.social_login.kakao
 
-import com.gc.api.customer.adapter.out.external.dto.response.social_login.OAuthProfile
-import com.gc.api.customer.adapter.out.external.dto.response.social_login.kakao.KakaoOAuthToken
+import com.gc.api.customer.adapter.out.external.social_login.dto.OAuthProfile
+import com.gc.api.customer.adapter.out.external.social_login.dto.kakao.KakaoOAuthToken
 import com.gc.api.customer.application.port.out.external.social_login.SocialLoginPort
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component

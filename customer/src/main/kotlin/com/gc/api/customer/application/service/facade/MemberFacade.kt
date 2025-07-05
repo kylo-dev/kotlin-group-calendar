@@ -1,8 +1,8 @@
 package com.gc.api.customer.application.service.facade
 
-import com.gc.api.customer.adapter.out.external.dto.response.social_login.OAuthProfile
-import com.gc.api.customer.adapter.out.external.dto.response.social_login.kakao.KakaoProfile
-import com.gc.api.customer.adapter.out.external.dto.response.social_login.naver.NaverProfile
+import com.gc.api.customer.adapter.out.external.social_login.dto.OAuthProfile
+import com.gc.api.customer.adapter.out.external.social_login.dto.kakao.KakaoProfile
+import com.gc.api.customer.adapter.out.external.social_login.dto.naver.NaverProfile
 import com.gc.api.customer.domain.model.OauthProvider
 import com.gc.api.customer.domain.model.member.Member
 import com.gc.api.customer.domain.service.member.MemberCommandService
@@ -10,7 +10,7 @@ import com.gc.api.customer.domain.service.member.MemberQueryService
 import com.gc.api.customer.framework.security.CustomAuthority
 import com.gc.api.customer.framework.security.JwtProvider
 import com.gc.api.customer.framework.security.TokenDto
-import com.gc.common.framework.exception.CustomBadRequestException
+import com.gc.common.exception.CustomBadRequestException
 import org.springframework.stereotype.Service
 
 @Service

@@ -29,24 +29,11 @@ dependencies {
     // spring web
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-
-    // graphql
-    implementation("org.springframework.boot:spring-boot-starter-graphql")
-    implementation("com.graphql-java:graphql-java-extended-scalars:22.0")
-//    implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:14.0.0")
-    testImplementation("org.springframework.graphql:spring-graphql-test")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
     // db
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.projectlombok:lombok")
-
-    // querydsl - mongodb
-    implementation("com.querydsl:querydsl-mongodb:5.0.0") {
-        exclude(group = "org.mongodb", module = "mongo-java-driver")
-    }
-    implementation("com.querydsl:querydsl-apt:5.0.0:jakarta")
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 
     // security
     implementation("org.springframework.boot:spring-boot-starter-security")
@@ -63,6 +50,20 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.springframework.security:spring-security-test")
+
+    // graphql
+//    implementation("org.springframework.boot:spring-boot-starter-graphql")
+//    implementation("com.graphql-java:graphql-java-extended-scalars:22.0")
+//    implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:14.0.0")
+//    testImplementation("org.springframework.graphql:spring-graphql-test")
+
+    // querydsl - mongodb
+//    implementation("com.querydsl:querydsl-mongodb:5.0.0") {
+//        exclude(group = "org.mongodb", module = "mongo-java-driver")
+//    }
+//    implementation("com.querydsl:querydsl-apt:5.0.0:jakarta")
+//    kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
+
 }
 
 tasks.test {

@@ -4,6 +4,5 @@ import com.gc.api.customer.domain.model.member.Member
 
 interface GetMemberPort {
 
-  fun getMemberByEmailAndOauth(email: String, oauthProvider: String): Member?
-  fun existsMemberByEmailAndOauth(email: String, oauthProvider: String): Boolean
+    fun getMemberByEmailAndOauth(email: String, oauthProvider: String): Member?
 }

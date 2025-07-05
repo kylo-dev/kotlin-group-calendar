@@ -7,9 +7,9 @@ import org.springframework.web.context.annotation.RequestScope
 @Component
 @RequestScope
 class RequestInfo {
-  lateinit var member: Member
+    lateinit var member: Member
 
-  fun setRequestMember(member: Member) {
-    this.member = member
-  }
+    fun setRequestMember(member: Member) {
+        this.member = member
+    }
 }

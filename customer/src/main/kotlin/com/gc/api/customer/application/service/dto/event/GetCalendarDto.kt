@@ -1,5 +1,6 @@
 package com.gc.api.customer.application.service.dto.event
 
+import com.gc.api.customer.domain.model.member.Member
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters
 
@@ -10,12 +11,12 @@ data class GetCalendarDto(
 ) {
 
     companion object {
-        fun of(memberId: String, startDate: LocalDate, endDate: LocalDate?): GetCalendarDto {
+        fun of(member: Member, startDate: LocalDate, endDate: LocalDate?): GetCalendarDto {
 
             val endDate = endDate ?: startDate.with(TemporalAdjusters.lastDayOfMonth())
 
             return GetCalendarDto(
-                memberId,
+                member.id,
                 startDate,
                 endDate,
             )

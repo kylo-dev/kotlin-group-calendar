@@ -11,31 +11,31 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-  val jwtAuthenticationFilter: JwtAuthenticationFilter,
-  val authenticationEntryPoint: AuthenticationEntryPoint,
-  val forbiddenAuthorityHandler: ForbiddenAuthorityHandler,
+    val jwtAuthenticationFilter: JwtAuthenticationFilter,
+    val authenticationEntryPoint: AuthenticationEntryPoint,
+    val forbiddenAuthorityHandler: ForbiddenAuthorityHandler,
 ) {
 
-  @Bean
-  fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-    return http
-      .httpBasic { it.disable() }
-      .csrf { it.disable() }
-      .formLogin { it.disable() }
-      .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-      .authorizeHttpRequests {
-        it
-        .requestMatchers("/api/login/**", "/graphiql/**").permitAll()
-          .requestMatchers("/graphql")
-          .hasAnyAuthority(CustomAuthority.MEMBER.authority, CustomAuthority.ADMIN.authority)
-          .anyRequest()
-          .permitAll()
-      }
-      .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
-      .exceptionHandling {
-        it.authenticationEntryPoint(authenticationEntryPoint)
-          .accessDeniedHandler(forbiddenAuthorityHandler)
-      }
-      .build()
-  }
+    @Bean
+    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
+        return http
+            .httpBasic { it.disable() }
+            .csrf { it.disable() }
+            .formLogin { it.disable() }
+            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .authorizeHttpRequests {
+                it
+                    .requestMatchers("/api/login/**", "/graphiql/**").permitAll()
+                    .anyRequest().authenticated()
+            }
+            .addFilterBefore(
+                jwtAuthenticationFilter,
+                UsernamePasswordAuthenticationFilter::class.java
+            )
+            .exceptionHandling {
+                it.authenticationEntryPoint(authenticationEntryPoint)
+                    .accessDeniedHandler(forbiddenAuthorityHandler)
+            }
+            .build()
+    }
 }

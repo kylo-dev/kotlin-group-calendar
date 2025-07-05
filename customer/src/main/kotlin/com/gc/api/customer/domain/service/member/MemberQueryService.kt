@@ -15,7 +15,4 @@ class MemberQueryService(
     return getMemberPort.getMemberByEmailAndOauth(email, oauthProvider)
   }
 
-  fun existMember(email: String, oauthProvider: String): Boolean {
-    return getMemberPort.existsMemberByEmailAndOauth(email, oauthProvider)
-  }
 }
