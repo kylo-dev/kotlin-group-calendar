@@ -5,4 +5,5 @@ object UrlConstant {
   const val LABEL = "/api/labels"
   const val EVENT = "/api/events"
   const val MEMBER = "/api/members"
+  const val GROUP = "/api/groups"
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class ChangeLabelRepository(
     private val mongoTemplate: MongoTemplate,
-): ChangeMemberLabelPort {
+) : ChangeMemberLabelPort {
 
     override fun changeMemberLabel(request: ChangeMemberLabelDto) {
 
@@ -20,7 +20,7 @@ class ChangeLabelRepository(
             Criteria.where("memberId").`is`(request.memberId)
                 .and("labelId").`is`(request.labelId)
         )
-        val update =Update()
+        val update = Update()
         request.labelName?.let { update.set("label", it) }
         request.labelColor?.let { update.set("color", it) }
 
