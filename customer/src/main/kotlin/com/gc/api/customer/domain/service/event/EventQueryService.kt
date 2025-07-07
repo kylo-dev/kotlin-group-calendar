@@ -2,6 +2,7 @@ package com.gc.api.customer.domain.service.event
 
 import com.gc.api.customer.application.port.out.persistence.event.GetEventPort
 import com.gc.api.customer.application.service.dto.event.GetCalendarDto
+import com.gc.api.customer.application.service.dto.event.SearchEventDto
 import com.gc.api.customer.domain.model.event.Event
 import com.gc.api.customer.framework.exception.orNotFound
 import org.springframework.stereotype.Service
@@ -18,5 +19,9 @@ class EventQueryService(
 
     fun getCalendar(getCalendarDto: GetCalendarDto): List<Event> {
         return getEventPort.getCalendar(getCalendarDto)
+    }
+
+    fun searchEvents(request: SearchEventDto): List<Event> {
+        return getEventPort.searchEvents(request)
     }
 }

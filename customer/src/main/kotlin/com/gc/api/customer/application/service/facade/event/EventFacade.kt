@@ -2,6 +2,7 @@ package com.gc.api.customer.application.service.facade.event
 
 import com.gc.api.customer.adapter.`in`.dto.response.event.EventResponse
 import com.gc.api.customer.application.service.dto.event.GetCalendarDto
+import com.gc.api.customer.application.service.dto.event.SearchEventDto
 import com.gc.api.customer.domain.model.event.CalendarEvent
 import com.gc.api.customer.domain.service.event.EventQueryService
 import com.gc.api.customer.domain.service.label.LabelQueryService
@@ -39,5 +40,22 @@ class EventFacade(
             val label = labelMap[event.labelId]
             CalendarEvent.loadFromDocument(event, label!!)
         }.toList()
+    }
+
+    fun searchEvents(searchEventDto: SearchEventDto): List<CalendarEvent> {
+
+        // search event
+        val events = eventQueryService.searchEvents(searchEventDto)
+        val labelIds = events.map { it.labelId }.toSet()
+
+        // label
+        val allEventLabel = labelQueryService.getAllEventLabel(searchEventDto.memberId, labelIds)
+        val labelMap = allEventLabel.associateBy { it.id }
+
+        // Calendar
+        return events.map { event ->
+            val label = labelMap[event.labelId]
+            CalendarEvent.loadFromDocument(event, label!!)
+        }
     }
 }
