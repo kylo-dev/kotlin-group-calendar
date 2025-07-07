@@ -17,10 +17,8 @@ class GroupFacade(
 
         // 1. 그룹 생성
         val newGroup = groupCommandService.createGroup(createGroupDto)
-
-        // 2. 그룹 리더 생성
-        groupMemberCommandService.registerGroupMember(createGroupDto, newGroup)
-
+        // 2. 그룹 참가
+        groupMemberCommandService.joinGroup(createGroupDto.toJoinGroupDto(newGroup))
         return newGroup
     }
 }
