@@ -8,14 +8,14 @@ import java.time.LocalTime
 
 @Document("group_promises")
 data class GroupPromiseDocument(
-  val title: String,
-  val groupId: String,
-  val status: String, // TODO : ENUM
-  val candidateEvents: String,
-  val candidateStartTime: LocalTime,
-  val candidateEndTime: LocalTime,
-  val deadline: LocalDateTime,
-  val hasTimer: Boolean,
-  @Id
-  val id: String? = null,
-): BaseTimeEntity()
+    val title: String,
+    val groupId: String,
+    val status: String, // TODO : ENUM
+    val candidateEvents: String,
+    val candidateStartTime: LocalTime,
+    val candidateEndTime: LocalTime,
+    val deadline: LocalDateTime,
+    val hasTimer: Boolean,
+    @Id
+    val id: String? = null,
+) : BaseTimeEntity()

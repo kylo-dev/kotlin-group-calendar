@@ -5,5 +5,5 @@ import com.gc.api.customer.domain.model.member.Member
 
 interface PostMemberPort {
 
-  fun save(oauthProfile: OAuthProfile): Member
+    fun save(oauthProfile: OAuthProfile): Member
 }

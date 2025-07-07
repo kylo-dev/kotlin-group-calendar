@@ -2,12 +2,14 @@ package com.gc.api.customer.adapter.out.persistence.event
 
 import com.gc.api.customer.application.port.out.persistence.event.GetEventPort
 import com.gc.api.customer.application.service.dto.event.GetCalendarDto
+import com.gc.api.customer.application.service.dto.event.SearchEventDto
 import com.gc.api.customer.domain.model.EventAlarm
 import com.gc.api.customer.domain.model.event.Event
 import com.gc.api.customer.domain.model.event.EventFrequency
 import com.gc.api.customer.domain.model.event.EventPeriod
 import com.gc.storage.document.event.EventDocument
 import com.gc.storage.document.event.EventMongoRepository
+import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
@@ -31,14 +33,6 @@ class GetEventRepository(
         val startDateTime = getCalendarDto.startDate.atTime(LocalTime.MIN)
         val endDateTime = getCalendarDto.endDate.atTime(LocalTime.MAX)
 
-//        val results = from(eventDocument)
-//            .where(
-//                eventDocument.memberId.eq(getCalendarDto.memberId)
-//                    .and(eventDocument.startDateTime.goe(startDateTime))
-//                    .and(eventDocument.endDateTime.loe(endDateTime))
-//            )
-//            .fetch()
-
         val query = Query().apply {
             addCriteria(
                 Criteria.where("memberId").`is`(getCalendarDto.memberId)
@@ -49,6 +43,35 @@ class GetEventRepository(
 
         val results = mongoTemplate.find(query, EventDocument::class.java)
 
+        return results.map { documentToModel(it) }
+    }
+
+    override fun searchEvents(request: SearchEventDto): List<Event> {
+
+        val query = Query().apply {
+            addCriteria(
+                Criteria.where("memberId").`is`(request.memberId)
+                    .and("title").regex(request.keyword, "i")
+            )
+
+            request.cursor?.let { cursor ->
+                addCriteria(Criteria.where("_id").lt(cursor))
+            }
+
+            with(
+                Sort.by(
+                    Sort.Order.desc("_id"),
+                    Sort.Order.desc("isAllDay"),
+                    Sort.Order.asc("startDateTime"),
+                    Sort.Order.asc("endDateTime")
+                )
+            )
+            limit(request.size)
+        }
+
+//        logger.info {query.toString()}
+
+        val results = mongoTemplate.find(query, EventDocument::class.java)
         return results.map { documentToModel(it) }
     }
 

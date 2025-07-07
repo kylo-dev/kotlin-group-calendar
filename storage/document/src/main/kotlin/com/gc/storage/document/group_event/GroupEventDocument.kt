@@ -7,10 +7,10 @@ import java.time.LocalDateTime
 
 @Document("group_events")
 data class GroupEventDocument(
-  val groupPromiseId: String,
-  val isAllDay: Boolean,
-  val startDateTime: LocalDateTime,
-  val endDateTime: LocalDateTime,
-  @Id
-  val id: String? = null,
-): BaseTimeEntity()
+    val groupPromiseId: String,
+    val isAllDay: Boolean,
+    val startDateTime: LocalDateTime,
+    val endDateTime: LocalDateTime,
+    @Id
+    val id: String? = null,
+) : BaseTimeEntity()

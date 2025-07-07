@@ -2,10 +2,11 @@ package com.gc.api.customer.adapter.`in`.rest.event
 
 import com.gc.api.customer.adapter.`in`.dto.request.event.PostEventRequest
 import com.gc.api.customer.adapter.`in`.dto.request.event.UpdateEventRequest
+import com.gc.api.customer.adapter.`in`.dto.response.ResponseData
 import com.gc.api.customer.adapter.`in`.dto.response.event.CalendarResponse
 import com.gc.api.customer.adapter.`in`.dto.response.event.EventResponse
-import com.gc.api.customer.adapter.`in`.dto.response.ResponseData
 import com.gc.api.customer.application.service.dto.event.GetCalendarDto
+import com.gc.api.customer.application.service.dto.event.SearchEventDto
 import com.gc.api.customer.application.service.facade.event.EventFacade
 import com.gc.api.customer.domain.service.event.EventCommandService
 import com.gc.api.customer.framework.annotation.RequestInfo
@@ -36,6 +37,22 @@ class EventController(
         val calendarEvents = eventFacade.getCalendar(getCalenderDto)
         return ResponseData.success(CalendarResponse.toCalendarResponse(calendarEvents))
     }
+
+    /**
+     * Cursor 기반 페이징
+     */
+    @GetMapping("/search")
+    @RequireAuth
+    fun searchEvents(
+        @RequestParam q: String,
+        @RequestParam cursor: String?,
+        @RequestParam(defaultValue = "10") size: Int,
+    ): ResponseData<List<CalendarResponse>> {
+        val searchEvents =
+            eventFacade.searchEvents(SearchEventDto.of(requestInfo.member, q, cursor, size))
+        return ResponseData.success(CalendarResponse.toCalendarResponse(searchEvents))
+    }
+
 
     @PostMapping
     @RequireAuth
