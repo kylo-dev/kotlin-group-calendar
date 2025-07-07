@@ -21,3 +21,10 @@ data class Group(
         }
     }
 }
+
+data class GroupMember(
+    val groupId: String,
+    val memberId: String,
+    val memberNickname: String,
+    val memberProfile: String?,
+)
