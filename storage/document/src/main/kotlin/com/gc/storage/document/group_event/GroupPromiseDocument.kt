@@ -9,7 +9,7 @@ import java.time.LocalTime
 
 @Document("group_promises")
 data class GroupPromiseDocument(
-    val title: String,
+    val purpose: String,
     val groupId: String,
     val status: String, // TODO : ENUM
     val candidateDays: List<LocalDate>,
