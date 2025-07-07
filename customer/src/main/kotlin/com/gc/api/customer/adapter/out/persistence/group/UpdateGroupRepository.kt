@@ -1,6 +1,6 @@
 package com.gc.api.customer.adapter.out.persistence.group
 
-import com.gc.api.customer.adapter.out.persistence.util.executeIfUpdateNotEmpty
+import com.gc.api.customer.adapter.out.persistence.util.updateIfUpdateNotEmpty
 import com.gc.api.customer.application.port.out.persistence.group.UpdateGroupPort
 import com.gc.api.customer.application.service.dto.group.UpdateGroupDto
 import com.gc.storage.document.group.GroupDocument
@@ -25,6 +25,6 @@ class UpdateGroupRepository(
             request.groupDescription?.let { set("description", it) }
         }
 
-        mongoTemplate.executeIfUpdateNotEmpty<GroupDocument>(query, update)
+        mongoTemplate.updateIfUpdateNotEmpty<GroupDocument>(query, update)
     }
 }
