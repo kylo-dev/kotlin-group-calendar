@@ -1,5 +1,6 @@
 package com.gc.api.customer.adapter.`in`.rest.group
 
+import com.gc.api.customer.adapter.`in`.dto.request.group.member.JoinGroupMemberRequest
 import com.gc.api.customer.adapter.`in`.dto.request.group.member.UpdateGroupMemberRequest
 import com.gc.api.customer.adapter.`in`.dto.response.ResponseData
 import com.gc.api.customer.adapter.`in`.dto.response.group.member.GroupMemberResponse
@@ -24,6 +25,14 @@ class GroupMemberController(
             GroupMemberResponse.from(it)
         }
         return ResponseData.success(groupMemberResponses)
+    }
+
+    @PostMapping("/{groupId}")
+    fun joinGroup(
+        @PathVariable groupId: String,
+        @RequestBody request: JoinGroupMemberRequest): ResponseData<String> {
+        groupMemberCommandService.joinGroup(request.toServiceRequest(groupId, requestInfo.member))
+        return ResponseData.success(requestInfo.member.id)
     }
 
     @PatchMapping("/{groupId}/members")
