@@ -9,9 +9,11 @@ import com.gc.api.customer.domain.service.group.GroupQueryService
 import com.gc.api.customer.domain.service.group.member.GroupMemberCommandService
 import com.gc.api.customer.domain.service.group.member.GroupMemberQueryService
 import com.gc.api.customer.domain.service.group_event.GroupEventQueryService
+import com.gc.api.customer.framework.exception.toCoroutineException
 import com.gc.common.logging.logger
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import org.springframework.stereotype.Service
 
 @Service
@@ -41,22 +43,29 @@ class GroupFacade(
 
         // 2. 그룹 내 확정된 약속 조회 (최대 3개씩)
         val top3GroupEventsMapDeferred = async {
-            logger.info { "[${Thread.currentThread().name}] getTop3EventsByGroup 실행" }
-            groupEventQueryService.getTop3EventsByGroup(groupIds)
+            withRetry {
+                groupEventQueryService.getTop3EventsByGroup(groupIds)
+            }
         }
 
         // 3. 그룹 내 속한 멤버 조회
         // query: n번 (groups 크기만큼) -> query 1번 (groups)
         val groupMemberMapDeferred = async {
-            logger.info { "[${Thread.currentThread().name}] findAllGroupMembers 실행" }
-            groupMemberQueryService.findAllGroupMembers(groupIds)
+            withRetry {
+                groupMemberQueryService.findAllGroupMembers(groupIds)
+            }
         }
 
         // 결과 await
-        val top3EventsByGroupMap = top3GroupEventsMapDeferred.await()
-        val groupMemberMap = groupMemberMapDeferred.await()
+        val top3EventsByGroupMap = runCatching {
+            top3GroupEventsMapDeferred.await()
+        }.onFailure {logger.error { "그룹 내 Top3 약속 조회 실패: $it" }
+        }.getOrElse { throw it }
 
-        logger.info { "[${Thread.currentThread().name}] 코루틴 작업 완료" }
+        val groupMemberMap = runCatching {
+            groupMemberMapDeferred.await()
+        }.onFailure {logger.error { "그룹원 약속 조회 실패: $it" }
+        }.getOrElse { throw it }
 
         groups.map { group ->
             val groupId = group.id
@@ -64,5 +73,23 @@ class GroupFacade(
             val groupEvents = top3EventsByGroupMap[groupId] ?: emptyList()
             GroupOverview.of(group, groupMembers, groupEvents)
         }
+    }
+
+    private suspend fun <T> withRetry(
+        maxAttempt: Int = 3,
+        delayMillis: Long = 300,
+        block: suspend () -> T,
+    ): T {
+        var lastException: Throwable? = null
+        repeat(maxAttempt) { attempt ->
+            try {
+                return block()
+            } catch (e: Exception) {
+                logger.warn { "[Retry attempt ${attempt + 1}] failed, $e" }
+                lastException = e
+                if (attempt < maxAttempt - 1) delay(delayMillis)
+            }
+        }
+        throw toCoroutineException(lastException!!)
     }
 }
