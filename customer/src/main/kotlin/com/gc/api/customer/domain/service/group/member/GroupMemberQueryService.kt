@@ -13,7 +13,7 @@ class GroupMemberQueryService(
         return getGroupMemberPort.getGroupMembers(groupId)
     }
 
-    fun findAllGroupMembers(groupIds: List<String>): Map<String, List<GroupMember>> {
+    suspend fun findAllGroupMembers(groupIds: List<String>): Map<String, List<GroupMember>> {
         val allGroupMembers: List<GroupMember> = getGroupMemberPort.getAllGroupMembers(groupIds)
         return allGroupMembers.groupBy { it.groupId }
     }

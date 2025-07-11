@@ -10,6 +10,8 @@ import com.gc.api.customer.domain.service.group.GroupCommandService
 import com.gc.api.customer.framework.annotation.RequestInfo
 import com.gc.api.customer.framework.annotation.RequireAuth
 import com.gc.api.customer.utils.UrlConstant
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -22,7 +24,10 @@ class GroupController(
 
     @GetMapping
     fun findGroups(): ResponseData<List<GroupOverViewResponse>> {
-        val results = groupFacade.findAllGroupByMember(requestInfo.member)
+        val member = requestInfo.member
+        val results = runBlocking(Dispatchers.IO) {
+            groupFacade.findAllGroupByMember(member)
+        }
         return ResponseData.success(GroupOverViewResponse.from(results))
     }
 

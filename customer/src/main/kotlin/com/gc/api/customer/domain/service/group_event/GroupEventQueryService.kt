@@ -9,7 +9,7 @@ class GroupEventQueryService(
     private val getGroupEventPort: GetGroupEventPort,
 ) {
 
-    fun getTop3EventsByGroup(groupIds: List<String>): Map<String, List<GroupEvent>> {
+    suspend fun getTop3EventsByGroup(groupIds: List<String>): Map<String, List<GroupEvent>> {
         val groupEvents: List<GroupEvent> = getGroupEventPort.findTop3EventsByGroup(groupIds)
         return groupEvents.groupBy { it.groupId }
     }
