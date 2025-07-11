@@ -3,6 +3,7 @@ package com.gc.api.customer.adapter.`in`.rest.group
 import com.gc.api.customer.adapter.`in`.dto.request.group.CreateGroupRequest
 import com.gc.api.customer.adapter.`in`.dto.request.group.UpdateGroupRequest
 import com.gc.api.customer.adapter.`in`.dto.response.ResponseData
+import com.gc.api.customer.adapter.`in`.dto.response.group.GroupOverViewResponse
 import com.gc.api.customer.adapter.`in`.dto.response.group.GroupResponse
 import com.gc.api.customer.application.service.facade.group.GroupFacade
 import com.gc.api.customer.domain.service.group.GroupCommandService
@@ -18,6 +19,12 @@ class GroupController(
     private val groupFacade: GroupFacade,
     private val groupCommandService: GroupCommandService,
 ) {
+
+    @GetMapping
+    fun findGroups(): ResponseData<List<GroupOverViewResponse>> {
+        val results = groupFacade.findAllGroupByMember(requestInfo.member)
+        return ResponseData.success(GroupOverViewResponse.from(results))
+    }
 
     @PostMapping
     @RequireAuth
