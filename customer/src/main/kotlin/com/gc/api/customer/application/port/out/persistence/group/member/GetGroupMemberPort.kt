@@ -4,4 +4,5 @@ import com.gc.api.customer.domain.model.group.GroupMember
 
 interface GetGroupMemberPort {
     fun getGroupMembers(groupId: String): List<GroupMember>
+    fun getAllGroupMembers(groupIds: List<String>): List<GroupMember>
 }

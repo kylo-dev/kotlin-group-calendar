@@ -7,7 +7,9 @@ import java.time.LocalDateTime
 
 @Document("group_events")
 data class GroupEventDocument(
+    val title: String,
     val groupPromiseId: String,
+    val groupId: String,
     val isAllDay: Boolean,
     val startDateTime: LocalDateTime,
     val endDateTime: LocalDateTime,
